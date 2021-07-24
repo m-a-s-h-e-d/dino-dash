@@ -4,12 +4,19 @@ using UnityEngine;
 
 public class PlayerDeath : MonoBehaviour
 {
+    public AudioClip clip;
+    public AudioSource source;
+
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            Destroy(gameObject);
-            LevelManager.instance.Respawn();
+            if (gameObject != null)
+            {
+                source.PlayOneShot(clip, 0.5f);
+            }
+            Destroy(gameObject, 1f);
+            LevelManager.instance.WaitRespawn();
         }
     }
 }

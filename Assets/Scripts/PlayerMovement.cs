@@ -27,7 +27,6 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         mx = 0.7f;
-        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,7 +35,15 @@ public class PlayerMovement : MonoBehaviour
         Collider2D faceCheck = Physics2D.OverlapCircle(face.position, 0.2f, groundLayers);
         if (faceCheck != null)
         {
-            mx = -mx;
+            if (Input.GetButton("Jump") && !IsGrounded())
+            {
+                mx = -mx;
+                source.PlayOneShot(clip, 0.5f);
+                Jump();
+            } else
+            {
+                mx = -mx;
+            }
         }
         //mx = Input.GetAxisRaw("Horizontal");
 

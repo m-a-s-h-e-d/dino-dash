@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 7759913286723357474}
   - component: {fileID: 7759913286723357477}
   - component: {fileID: 7759913286723357475}
-  - component: {fileID: -3995298154593070675}
+  - component: {fileID: 6411070300453157242}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -498,8 +498,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   clip: {fileID: 8300000, guid: c54fb4f36297bc449bb996b00db114a3, type: 3}
-  source: {fileID: -3995298154593070675}
---- !u!82 &-3995298154593070675
+  source: {fileID: 6411070300453157242}
+--- !u!82 &6411070300453157242
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

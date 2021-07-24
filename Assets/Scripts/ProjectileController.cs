@@ -15,7 +15,6 @@ public class ProjectileController : MonoBehaviour
     private void Start()
     {
         pm = gameObject.GetComponent<PlayerMovement>();
-        source = gameObject.GetComponent<AudioSource>();
     }
 
     private void Update()
