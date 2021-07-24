@@ -12,20 +12,33 @@ public class PlayerMovement : MonoBehaviour
 
     public float jumpForce = 20f;
     public Transform feet;
+    public Transform face;
     public LayerMask groundLayers;
+
+    public AudioClip clip;
+    public AudioSource source;
+    public float nextSoundTime = 0;
+
+    [HideInInspector] public bool isFacingRight = true;
 
     float mx;
 
     // Start is called before the first frame update
     private void Start()
     {
-        
+        mx = 0.7f;
+        source = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
     private void Update()
     {
-        mx = Input.GetAxisRaw("Horizontal");
+        Collider2D faceCheck = Physics2D.OverlapCircle(face.position, 0.2f, groundLayers);
+        if (faceCheck != null)
+        {
+            mx = -mx;
+        }
+        //mx = Input.GetAxisRaw("Horizontal");
 
         if (Input.GetButton("Jump") && IsGrounded())
         {
@@ -43,9 +56,11 @@ public class PlayerMovement : MonoBehaviour
         if (mx > 0f)
         {
             transform.localScale = new Vector3(1f, 1f, 1f);
+            isFacingRight = true;
         } else if (mx < 0f)
         {
             transform.localScale = new Vector3(-1f, 1f, 1f);
+            isFacingRight = false;
         }
 
         anim.SetBool("isGrounded", IsGrounded());
@@ -61,12 +76,17 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 movement = new Vector2(rb.velocity.x, jumpForce);
 
+        if (Time.time >= nextSoundTime)
+        {
+            source.PlayOneShot(clip, 0.5f);
+        }
         rb.velocity = movement;
+        nextSoundTime = Time.time + clip.length;
     }
 
     public bool IsGrounded()
     {
-        Collider2D groundCheck = Physics2D.OverlapCircle(feet.position, 0.5f, groundLayers);
+        Collider2D groundCheck = Physics2D.OverlapCircle(feet.position, 0.3f, groundLayers);
 
         if (groundCheck != null)
         {
