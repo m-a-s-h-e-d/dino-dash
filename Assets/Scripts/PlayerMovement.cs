@@ -8,6 +8,8 @@ public class PlayerMovement : MonoBehaviour
     public float movementSpeed;
     public Rigidbody2D rb;
 
+    public Animator anim;
+
     public float jumpForce = 20f;
     public Transform feet;
     public LayerMask groundLayers;
@@ -29,6 +31,24 @@ public class PlayerMovement : MonoBehaviour
         {
             Jump();
         }
+
+        if (Mathf.Abs(mx) > 0.05f)
+        {
+            anim.SetBool("isRunning", true);
+        } else
+        {
+            anim.SetBool("isRunning", false);
+        }
+
+        if (mx > 0f)
+        {
+            transform.localScale = new Vector3(1f, 1f, 1f);
+        } else if (mx < 0f)
+        {
+            transform.localScale = new Vector3(-1f, 1f, 1f);
+        }
+
+        anim.SetBool("isGrounded", IsGrounded());
     }
 
     private void FixedUpdate()
