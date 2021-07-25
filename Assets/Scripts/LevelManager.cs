@@ -31,6 +31,7 @@ public class LevelManager : MonoBehaviour
     IEnumerator RespawnAfterSeconds(float delay)
     {
         yield return new WaitForSeconds(delay);
+        EnemyManager.instance.Respawn();
         Respawn();
     }
 }

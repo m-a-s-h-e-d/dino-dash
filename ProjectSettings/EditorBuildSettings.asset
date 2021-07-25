@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Second Stage.unity
     guid: b11b902882aba784abe065e9dc4aa6eb
   - enabled: 1
+    path: Assets/Scenes/Third Stage.unity
+    guid: 2e907c75a93592845b90c02c94b9f33f
+  - enabled: 1
     path: Assets/Scenes/Victory.unity
     guid: 6d8c6bbb5d50d3f469ff2e596bdf4527
   m_configObjects: {}
