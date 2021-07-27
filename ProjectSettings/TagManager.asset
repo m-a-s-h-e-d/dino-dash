@@ -9,6 +9,8 @@ TagManager:
   - Enemy
   - Goal
   - DeathFloor
+  - PauseScreen
+  - PauseHandler
   layers:
   - Default
   - TransparentFX

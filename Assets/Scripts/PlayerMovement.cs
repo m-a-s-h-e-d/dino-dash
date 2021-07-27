@@ -18,6 +18,7 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip clip;
     public AudioSource source;
     public float nextSoundTime = 0;
+    public bool isPaused = false;
 
     [HideInInspector] public bool isFacingRight = true;
 
@@ -27,6 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         mx = 0.7f;
+        isPaused = false;
     }
 
     // Update is called once per frame
@@ -35,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
         Collider2D faceCheck = Physics2D.OverlapCircle(face.position, 0.2f, groundLayers);
         if (faceCheck != null)
         {
-            if (Input.GetButton("Jump") && !IsGrounded())
+            if (Input.GetButton("Jump") && !IsGrounded() && !isPaused)
             {
                 mx = -mx;
                 source.PlayOneShot(clip, 0.5f);
@@ -47,7 +49,7 @@ public class PlayerMovement : MonoBehaviour
         }
         //mx = Input.GetAxisRaw("Horizontal");
 
-        if (Input.GetButton("Jump") && IsGrounded())
+        if (Input.GetButton("Jump") && IsGrounded() && !isPaused)
         {
             Jump();
         }
@@ -101,5 +103,15 @@ public class PlayerMovement : MonoBehaviour
         }
 
         return false;
+    }
+
+    public void Pause()
+    {
+        isPaused = true;
+    }
+
+    public void Resume()
+    {
+        isPaused = false;
     }
 }
